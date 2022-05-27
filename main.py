@@ -25,7 +25,7 @@ if __name__ == '__main__':
         self.connection = connection
         self.report_text = None
         self.escape_string = escape_string
-        self.result = None
+        self.result = 0
 
       def generate_report(self, user_id):
         cursor = self.connection.cursor()
