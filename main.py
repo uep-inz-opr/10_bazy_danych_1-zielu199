@@ -44,7 +44,10 @@ if __name__ == '__main__':
         rg = ReportGenerator(sqlite_con, escape_string="?")
         rg.generate_report(i)
         skladowa = rg.get_report()
-        suma += skladowa
+        if skladowa is not None:
+		suma += skladowa
+	else:
+		continue
 
     print(int(suma))
 
