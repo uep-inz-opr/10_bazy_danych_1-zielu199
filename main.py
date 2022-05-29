@@ -40,7 +40,7 @@ if __name__ == '__main__':
 
     suma = 0
 
-    for i in range(len(rows)):
+    for i in range(400):
         rg = ReportGenerator(sqlite_con, escape_string="?")
         rg.generate_report(i)
         skladowa = rg.get_report()
