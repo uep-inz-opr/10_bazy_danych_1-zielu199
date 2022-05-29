@@ -12,7 +12,7 @@ if __name__ == '__main__':
                           celltower data_type INTEGER);''') # use your column names here
 
         #Otwieramy plik.csv i przerzucamy go w najprostszy sposób do naszej nowo utworzonej bazy sqlite
-    with open('D:\kacpe\Documents\Studia\Magisterka\drugi_semestr\IO\zadanie_bazy_danych\polaczenia_duze.csv','r') as fin:
+    with open('polaczenia_duze.csv','r') as fin:
             # csv.DictReader uses first line in file for column headings by default
         reader = csv.reader(fin, delimiter = ";") # comma is default delimiter
         next(reader, None)  # skip the headers
