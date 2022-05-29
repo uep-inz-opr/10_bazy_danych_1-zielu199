@@ -6,14 +6,14 @@ if __name__ == '__main__':
 
     #Tworzymy pusta tabele polaczenia
     cur.execute('''CREATE TABLE polaczenia (from_subscriber data_type INTEGER, 
-                      to_subscriber data_type INTEGER, 
-                      datetime data_type timestamp, 
-                      duration data_type INTEGER , 
-                      celltower data_type INTEGER);''') # use your column names here
+                          to_subscriber data_type INTEGER, 
+                          datetime data_type timestamp, 
+                          duration data_type INTEGER , 
+                          celltower data_type INTEGER);''') # use your column names here
 
-    #Otwieramy plik.csv i przerzucamy go w najprostszy sposób do naszej nowo utworzonej bazy sqlite
-    with open('polaczenia_duze.csv','r') as fin:
-        # csv.DictReader uses first line in file for column headings by default
+        #Otwieramy plik.csv i przerzucamy go w najprostszy sposób do naszej nowo utworzonej bazy sqlite
+    with open('D:\kacpe\Documents\Studia\Magisterka\drugi_semestr\IO\zadanie_bazy_danych\polaczenia_duze.csv','r') as fin:
+            # csv.DictReader uses first line in file for column headings by default
         reader = csv.reader(fin, delimiter = ";") # comma is default delimiter
         next(reader, None)  # skip the headers
         rows = [x for x in reader]
@@ -21,22 +21,22 @@ if __name__ == '__main__':
         sqlite_con.commit()
 
     class ReportGenerator:
-      def __init__(self,connection, escape_string = "(%s)"):
-        self.connection = connection
-        self.report_text = None
-        self.escape_string = escape_string
-        self.result = 0
+        def __init__(self,connection, escape_string = "(%s)"):
+            self.connection = connection
+            self.report_text = None
+            self.escape_string = escape_string
+            self.result = 0
 
-      def generate_report(self, user_id):
-        cursor = self.connection.cursor()
-        sql_query = f"Select sum(duration) from polaczenia where from_subscriber ={self.escape_string}"
-        args = (user_id,)
-        cursor.execute(sql_query, args)
-        self.result = cursor.fetchone()[0]
-        self.report_text = f"Łączny czas trwania dla użytkownika {user_id} to {self.result}"
+        def generate_report(self, user_id):
+            cursor = self.connection.cursor()
+            sql_query = f"Select sum(duration) from polaczenia where from_subscriber ={self.escape_string}"
+            args = (user_id,)
+            cursor.execute(sql_query, args)
+            self.result = cursor.fetchone()[0]
+            self.report_text = f"Łączny czas trwania dla użytkownika {user_id} to {self.result}"
 
-      def get_report(self):
-        return self.result
+        def get_report(self):
+            return self.result
 
     suma = 0
 
@@ -45,9 +45,9 @@ if __name__ == '__main__':
         rg.generate_report(i)
         skladowa = rg.get_report()
         if skladowa is not None:
-		suma += skladowa
-	else:
-		continue
+            suma += skladowa
+        else:
+            continue
 
     print(int(suma))
 
